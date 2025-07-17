@@ -1,0 +1,160 @@
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+.fa-compass{
+    color:#fe424d;
+    font-size:2rem;
+}
+.nav-link{
+    color:#222222 !important;
+}
+
+.footer{
+    height: 8rem;
+    background-color: #ebebeb;
+  
+  display:flex;
+  flex-direction: column;
+ align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+  
+
+}
+.links a{
+    text-decoration: none;
+    color:#222222;
+   
+    margin-left: 0.5rem;
+}
+.links a:hover{
+    text-decoration: underline;
+}
+.icon{
+    display:flex;
+    width:100%;
+    font-size: 1.5rem;
+    align-content: center;
+    justify-content: center;
+    
+   
+    
+}
+.icon i{
+    margin-left: 0.5rem;
+    padding:0.5rem;
+}
+.brand{
+    display :flex;
+    justify-content: center;
+    width:100%;
+      text-align: center;
+}
+.links{
+    display:flex;
+    justify-content: center;
+    width:100%
+    
+}
+.footer div{
+   
+    flex:1;
+   
+  align-items: center;     /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  text-align: center;
+    
+ 
+}
+
+.card{
+    border: none !important; 
+    margin-bottom: 2rem;
+}
+.card img{
+    border-radius: 1rem;
+    width:100%;
+    height:20rem;
+    object-fit: cover;
+}
+.card-body{
+    padding:0 ;
+}
+.card-body p{
+    font-weight: 400;
+    padding:none;
+    margin:0;
+    
+ 
+ 
+}
+
+body{
+     font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container{
+    flex:1;
+}
+
+.row a{
+  text-decoration: none;
+}
+.card-img-overlay{
+    opacity:0;
+}
+
+.card-img-overlay:hover{
+    opacity:0.2;
+    background-color:whitesmoke;
+    box-shadow: 20px 20px 10px black;
+}
+
+.btn{
+    background-color: #fe424d;
+    border: none;
+}
+
+ .detail-btn{
+    display:flex;
+ }
+ .detail-btn button{
+    margin-left: 1rem;
+ }
+
+ .show-img{
+    height: 30vh !important;
+    width:70vh !important;
+ }
+ 
+ .review-card{
+   width: 20rem;
+  height: 20rem;
+  background-color: #f5f5f5;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  
+
+ }
+  .review-card>h6,h6{
+                 /* Enables vertical scrolling */
+  max-height: 100%;           /* Make it scrollable inside fixed card height */
+  flex-grow: 1;               /* Occupies remaining vertical space */
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  padding-right: 8px;         /* Room for scrollbar */
+  
+  }
+  .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

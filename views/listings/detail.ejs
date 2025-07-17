@@ -1,0 +1,77 @@
+<% layout("/layouts/boilerplate")%>
+<body>
+
+  <div class="row">
+    <div class="col-8 mt-3 offset-3">
+<h3> <%=item.title%></h3>
+
+<div class="card " style="width:60vh">
+  <img src="<%=item.image%>" class="card-img-top show-img" alt="<%=item.image%>" >
+  <div class="card-body">
+    <p class="card-text">
+    
+      <br><%=item.description%>
+      <br> &#8377;<%=item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");%>
+      <br><%=item.country%>
+      <br><%=item.location%>
+    </p>
+  </div>
+</div>
+
+
+<div class="detail-btn ">
+  <form action="/listings/<%=item._id%>/edit" method="get">
+  <button class="btn btn-dark detail-btn " style="margin:0;">Edit</button>
+ </form>
+ <form action="/listings/<%=item._id%>/delete" method="get">
+    <button class="btn btn-dark ">Delete</button>
+ </form>
+ </div>
+ <hr>
+ <div class="col-8 mt-3 offset-0">
+<h3>Leave Review</h3>
+<br>
+<form action="/listings/<%=item._id%>/review" method="post" class="needs-validation" novalidate >
+  <label for="rating">Rating</label>
+  <input type="range" id="
+  rating" name="review[rating]" class="form-range" min="1" max="5">
+<br>
+<label for="comments">Comments</label>
+<textarea name="review[content]" id="comments" cols="30" rols="6" class="form-control" required ></textarea>
+<div class="invalid-feedback">
+  Please add some comments!
+</div>
+<br>
+<button  class="btn btn-dark ">Submit</button>
+</form>
+ </div>
+ <hr>
+
+<p><b>All Reviews</b></p>
+<div class="card-container">
+ <% for( review of item.review ){ %>
+  <div class="review-card" >
+    <h5 class="card-title">Gaurav Mahadik</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary "><%=review.content%></h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary "><b><%=review.rating%> stars</b></h6>
+        <form action="/listings/<%=item._id%>/review/<%=review._id%>?_method=DELETE" method="post" >
+    <button class="btn btn-dark btn-sm mb-2 ms-0.75">Delete</button>
+        </form>
+  </div>
+ <% } %>
+</div>
+</div>
+</div>
+</div>
+</body>
+
+
+ 
+
+
+
+ 
+
+
+
+
