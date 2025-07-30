@@ -1,7 +1,91 @@
 <% layout("/layouts/boilerplate")%>
 <body>
 
-    <h3> All Listings  </h3>
+  <style>
+    #flaters{
+    display:flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+   
+  }
+#flater{
+     margin-top: 1rem;
+    text-align: center;
+    margin-right: 2rem;
+    opacity:0.6;
+  
+  }
+
+  #flater:hover{
+    opacity:1;
+  
+  }
+  .tax{
+    display:none;
+  }
+ .form-check-reverse:hover{
+  opacity: 1;
+ }
+
+  .form-check-reverse  {
+    /* border:1px solid black;
+    border-radius: 1rem; */
+    height: 3rem;
+    
+    text-align: center;
+    padding:0.5rem;
+    align-items: center;
+    
+    width:16rem;
+    opacity:0.7;
+    margin-top: 1rem;
+    margin-right:1rem ;
+ 
+  
+  }
+  .form-check-reverse ,input ,label{
+   margin-right:0px !important;
+
+  }
+  </style>
+<div id="flaters" >
+  <div id="flater">
+    <i class="fa-solid fa-key"></i>
+    <p>New</p>
+  </div>
+  <div id="flater">
+  <i class="fa-solid fa-fire"></i>
+    <p>Trendings</p>
+  </div>
+    <div id="flater">
+<i class="fa-solid fa-bed"></i>
+    <p>Private Rooms</p>
+  </div>
+   <div id="flater">
+<i class="fa-solid fa-house-chimney-user"></i>
+    <p>Cabins</p>
+  </div>
+     <div id="flater">
+<i class="fa-solid fa-dice"></i>
+    <p>Play</p>
+  </div>
+      <div id="flater">
+<i class="fa-solid fa-mountain-city"></i>
+    <p>Top of the world</p>
+  </div>
+     <div id="flater">
+<i class="fa-regular fa-eye"></i>
+    <p>Amazing Views</p>
+  </div>
+  
+  <div id="flater">
+    <div class="form-check form-check-reverse form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+  <label class="form-check-label" for="switchCheckDefault"><p>Display total with taxes</p> </label>
+</div>
+  </div>
+</div>
+
     <form action="/listings/new" method="get">
       <!--  <button type="submit">Add new Listing</button> -->
     </form>
@@ -12,7 +96,7 @@
     <a href="/listings/<%=list._id%>/detail">
       <div class="card " >
  
-<img src= " <%=list.image %>" alt=" <%=list.image %>" class="card-img-top">
+<img src= " <%=list.image.url %>" alt=" <%=list.image %>" class="card-img-top">
 <div class="card-img-overlay"></div>
 
   
@@ -21,7 +105,8 @@
     
              
     <p class="p-title"> <b><%=list.title%></b></p>
-    <p>&#8377;<%=list.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");%>/night</p>
+    <p>&#8377;<%=list.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");%>/night &nbsp; &nbsp; <i class="tax"> +18% GST</i></p>
+    
 
 
   </div>
@@ -33,3 +118,17 @@
 </div>
 </body>
 
+<script>
+    let taxswitch = document.getElementById("switchCheckDefault");
+    taxswitch.addEventListener("click" , ()=>{
+      let taxes = document.getElementsByClassName("tax");
+      for(tax of taxes){
+      if(tax.style.display !== "inline"){
+        tax.style.display ="inline";
+      }else{
+        tax.style.display ="none";
+      }
+    }
+    
+    })
+</script>

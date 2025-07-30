@@ -3,7 +3,7 @@
      <div class="row ">
  <div class="col-8 offset-1 mt-3" >
     <h3>Edit listing</h3>
- <form action="/listings/<%=item._id%>/edit?_method=PUT"  novalidate method="post" class="needs-validation">
+ <form action="/listings/<%=item._id%>/edit?_method=PUT"  novalidate method="post" class="needs-validation" enctype="multipart/form-data" >
     
 
     <div class="mb-3">
@@ -29,17 +29,13 @@
         Please add the description.
       </div>
 </div>
-  
+        Original Listing Image <br>
+        <img src="<%=item.image.url%>" alt="image" height="150rem" width="250rem" class="mt-2"><br> 
 
-        <div class="mb-3">
-              <label for="image" class="form-label">Image</label>
-         <input type="text" value="<%=item.image%>" name="listing[image]"  class="form-control" id="image" required >
-                 <div class="valid-feedback">
-       Looks good !
-      </div>
-         <div class="invalid-feedback">
-        Please add valid image url.
-      </div>
+        <div class="mb-3 mt-3">
+              <label for="image" class="form-label"> Upload New Image</label>
+         <input type="file" value="<%=item.image%>" name="listing[image]"  class="form-control" id="image" required >
+       
         </div>
          
 

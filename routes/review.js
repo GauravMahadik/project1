@@ -8,45 +8,31 @@ const Review = require("../models/review.js");
 const expressError = require("../utils/expressError");
 const asyncWrap = require("../utils/asyncWrap.js");
 const Listing = require("../models/listing.js");
+const {isLogedIn ,isReviewAuthor} = require("../views/middleware.js");
+const review = require("../controllers/review.js");
 
 
 
-
-const validateReview = (req,res,next)=>{
-let {error} = reviewSchema.validate(req.body);
+ const validateReview = (req,res,next)=>{
+   let {error} = reviewSchema.validate(req.body);
    
    if(error){
-   next(new  expressError(404 ,"something went wrong"));
+    const msg = error.details.map(el => el.message).join(",");
+   next(new expressError(404,msg));
    }
    else{
     next();
    }
 }
 
+
+
 //review creation
-router.post("/" ,  validateReview , asyncWrap(async(req ,res)=>{
-  
-  let data = await Listing.findById(req.params.id);
-
-  let  newReview = new Review(req.body.review);
-  data.review.push(newReview);
-
-   await newReview.save();
-   await data.save();
-   req.flash("success" ," Review created successfully");
-  res.redirect(`/listings/${req.params.id}/detail`);
-
-}))
+router.post("/" , isLogedIn, validateReview, asyncWrap(review.create))
 
 
 //review deletion
-router.delete("/:reviewId" , asyncWrap(async(req ,res)=>{
-  let {id ,reviewId} =req.params;
-  await Review.findByIdAndDelete(reviewId);
-  await Listing.findByIdAndUpdate(id ,{$pull:{review: reviewId}});
-  req.flash("success" ," Review deleted successfully");
-   res.redirect(`/listings/${id}/detail`);
-}))
+router.delete("/:reviewId" ,isReviewAuthor , asyncWrap(review.delete))
 
 
 module.exports = router;
