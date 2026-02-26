@@ -46,6 +46,12 @@ router.put("/:id/edit", isLogedIn , isOwner, upload.single('listing[image]'), va
 // Delete listing
 router.get("/:id/delete", isLogedIn, isOwner , asyncWrap(listing.delete));
 
+router.post("/search" ,listing.search );
+router.get("/trendings" , listing.trendings);
+router.get("/private" , listing.private);
+router.get("/topofworld" , listing.topofworld);
+router.get("/amazingView" , listing.amazingView);
+router.get("/newListings"  ,listing.newListings);
 
 
 

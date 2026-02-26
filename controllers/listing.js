@@ -76,4 +76,104 @@ module.exports.delete = async (req, res) => {
     res.redirect("/listings");
 }
 
+ module.exports.search = async(req ,res) =>{
+  const {search} = req.body;
  
+   let lists =  await Listing.find({location:`${search}`});
+   
+   if(lists.length>0){
+   res.render("listings/search.ejs", { lists });
+   }else{
+     req.flash("error"," Listing with this location is not added");
+       res.redirect("/listings");
+   }
+ }
+
+ module.exports.trendings = async(req ,res)=>{
+      const lists = await Listing.find({ price: { $gt: 3000 } });
+
+    if (lists.length > 0) {
+      res.render("listings/trendings.ejs", { lists });
+    } else {
+      req.flash("error", "No trending listings available right now");
+      res.redirect("/listings");
+    }
+
+ }
+  module.exports.private =async (req, res) => {
+    const lists = await Listing.find({});
+    res.render("listings/private.ejs", { lists });
+}
+module.exports.topofworld  = async(req ,res)=>{
+  const highAltitudePlaces = [
+      // India
+      "Ladakh", "Leh", "Spiti Valley", "Manali", "Shimla",
+      // Nepal
+      "Kathmandu", "Pokhara", "Everest Base Camp",
+      // Tibet / China
+      "Lhasa", "Tibet", "Mount Kailash",
+      // South America
+      "Cusco", "Machu Picchu", "La Paz", "Quito",
+      // North America
+      "Aspen", "Denver", "Telluride", "Banff",
+      // Europe
+      "Zermatt", "Chamonix", "St. Moritz", "Interlaken",
+      // Africa
+      "Mount Kilimanjaro", "Addis Ababa"
+    ];
+
+    const lists = await Listing.find({
+      location: { $in: highAltitudePlaces }
+    });
+
+    if (lists.length > 0) {
+      res.render("listings/topOfWorld.ejs", { lists });
+    } else {
+      req.flash("error", "No Top of the World listings available right now");
+      res.redirect("/listings");
+    }
+}
+
+module.exports.amazingView = async (req, res) => {
+  
+    const scenicPlaces = [
+      // Beaches & Islands
+      "Maldives", "Bali", "Goa", "Phuket", "Santorini",
+      "Maui", "Hawaii", "Bora Bora", "Seychelles", "Fiji",
+
+      // Mountains & Valleys
+      "Swiss Alps", "Zermatt", "Interlaken", "Chamonix", "Banff",
+      "Aspen", "Manali", "Shimla", "Leh", "Ladakh", "Spiti Valley",
+
+      // Lakes
+      "Lake Como", "Lake Tahoe", "Lake Louise", "Pokhara",
+      "Dal Lake", "Plitvice Lakes",
+
+      // Cities
+      "Dubai", "New York", "Hong Kong", "Singapore", "Paris", "Istanbul"
+    ];
+
+    const lists = await Listing.find({
+      location: { $in: scenicPlaces }
+    });
+
+    if (lists.length > 0) {
+      res.render("listings/amazingView.ejs", { lists });
+    } else {
+      req.flash("error", "No Amazing View listings available right now");
+      res.redirect("/listings");
+    }
+  }
+
+  module.exports.newListings = async (req, res) => {
+ 
+    // Fetch last 10 newly created listings
+    const lists = await Listing.find().sort({ createdAt: -1 }).limit(10);
+
+    if (lists.length > 0) {
+      res.render("listings/freshnew.ejs", { lists });
+    } else {
+      req.flash("error", "No new listings available right now");
+      res.redirect("/listings");
+    }
+  }

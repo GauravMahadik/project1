@@ -28,7 +28,7 @@ let listSchema = new Schema({
         ref : "User" ,
     },
     
-})
+}, { timestamps: true });
 
 listSchema.post("findOneAndDelete" ,async(listing)=>{
 if(listing){

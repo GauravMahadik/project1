@@ -13,9 +13,9 @@ async function main() {
 }
 
 async function init() {
-  await Listing.deleteMany({}).then((res)=>{
-    console.log(res);
-  });
+  // await Listing.deleteMany({}).then((res)=>{
+  //   console.log(res);
+  // });
     initData.data = initData.data.map((obj)=>({
     ...obj ,owner:'68735c10f4a8f41ad3649a37'
    }));
